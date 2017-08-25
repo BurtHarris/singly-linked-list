@@ -3,6 +3,7 @@
 class SinglyLinkedList {
   // Init List with given values
   constructor(newList) {
+    newList = newList || [];
     this.list = [];
     newList.forEach(item => this.push(item));
   }
