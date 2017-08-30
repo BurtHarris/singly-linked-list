@@ -11,8 +11,8 @@ describe('SinglyLinkedList sequence', () => {
     let emptyList = new SinglyLinkedList();
     let anotherEmptyList = new SinglyLinkedList([]);
 
-    expect(emptyList.list).to.be.empty;
-    expect(anotherEmptyList.list).to.be.empty;
+    expect(emptyList.head).to.be.empty;
+    expect(anotherEmptyList.head).to.be.empty;
   });
 
   it('should build sequence if provided', () => {
@@ -20,14 +20,24 @@ describe('SinglyLinkedList sequence', () => {
     linkedList.push('one more');
     linkedList.push(1);
 
-    expect(linkedList.list).to.eql([
-      { value: '3', next: 5 },
-      { value: 5, next: 7 },
-      { value: 7, next: 'another' },
-      { value: 'another', next: 'one more' },
-      { value: 'one more', next: 1 },
-      { value: 1}
-    ]);
+    expect(linkedList.head).to.eql({
+      value: '3',
+      next: {
+        value: 5,
+        next: {
+          value: 7,
+          next: {
+            value: 'another',
+            next: {
+              value: 'one more',
+              next: {
+                value: 1
+              }
+            }
+          }
+        }
+      }
+    });
   })
 
   it('should reverse sequence', () => {
@@ -35,12 +45,20 @@ describe('SinglyLinkedList sequence', () => {
     linkedList.push('one more');
     linkedList.reverse();
 
-    expect(linkedList.list).to.eql([
-      { value: 'one more', next: 4 },
-      { value: 4, next: 3 },
-      { value: 3, next: 2 },
-      { value: 2, next: 1 },
-      { value: 1 }
-    ]);
+    expect(linkedList.head).to.eql({
+      value: 'one more',
+      next: {
+        value: 4,
+        next: {
+          value: 3,
+          next: {
+            value: 2,
+            next: {
+              value: 1
+            }
+          }
+        }
+      }
+    });
   })
 });
