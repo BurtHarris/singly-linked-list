@@ -2,29 +2,29 @@
 
 const _ = require('lodash');
 
-class SinglyLinkedList {
-  // Init List with given values
-  constructor(newList) {
-    newList = newList || [];
-    this.head = {};
-    newList.forEach(item => this.push(item));
-  }
+function build(args) {
+  return args.reduce((head, item) => {
+    const node = { value: item };
 
-  // Push element into the list
-  push(ele) {
-    const node = { value: ele };
+    let current = head;
 
-    let current = this.head;
-
-    if (_.isEmpty(this.head)) {
-      this.head = node;
-      return node;
+    if (_.isEmpty(head)) {
+      head = node;
+      return head;
     }
     while (current.next) {
       current = current.next;
     }
     current.next = node;
-    return node;
+    return head;
+  }, {});
+}
+
+class SinglyLinkedList {
+  // Init List with given values
+  constructor() {
+    const args = Array.from(arguments) || [];
+    this.head = build(args);
   }
 
   // A simple print
@@ -41,8 +41,7 @@ class SinglyLinkedList {
       if (current.value) tempList.push(current.value);
       current = current.next || {};
     }
-    this.head = {};
-    tempList.reverse().forEach(item => this.push(item));
+    this.head = build(tempList.reverse());
   }
 }
 

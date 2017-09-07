@@ -9,16 +9,12 @@ describe('SinglyLinkedList sequence', () => {
 
   it('should be empty if not sequence provided', () => {
     let emptyList = new SinglyLinkedList();
-    let anotherEmptyList = new SinglyLinkedList([]);
 
     expect(emptyList.head).to.be.empty;
-    expect(anotherEmptyList.head).to.be.empty;
   });
 
   it('should build sequence if provided', () => {
-    const linkedList = new SinglyLinkedList(['3', 5, 7, 'another']);
-    linkedList.push('one more');
-    linkedList.push(1);
+    const linkedList = new SinglyLinkedList('3', 5, 7, 'another');
 
     expect(linkedList.head).to.eql({
       value: '3',
@@ -28,12 +24,6 @@ describe('SinglyLinkedList sequence', () => {
           value: 7,
           next: {
             value: 'another',
-            next: {
-              value: 'one more',
-              next: {
-                value: 1
-              }
-            }
           }
         }
       }
@@ -41,21 +31,17 @@ describe('SinglyLinkedList sequence', () => {
   })
 
   it('should reverse sequence', () => {
-    const linkedList = new SinglyLinkedList([1, 2, 3, 4]);
-    linkedList.push('one more');
+    const linkedList = new SinglyLinkedList(1, 2, 3, 4);
     linkedList.reverse();
 
     expect(linkedList.head).to.eql({
-      value: 'one more',
+      value: 4,
       next: {
-        value: 4,
+        value: 3,
         next: {
-          value: 3,
+          value: 2,
           next: {
-            value: 2,
-            next: {
-              value: 1
-            }
+            value: 1
           }
         }
       }
